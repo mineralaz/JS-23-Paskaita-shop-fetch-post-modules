@@ -7,6 +7,11 @@ class Shop {
     this.initTargets();
     this.getItems();
   }
+  // prideti naujam sukurtam produktui i sarasa
+  addNewProductToList(prod) {
+    this.items.unshift(prod);
+    this.renderList();
+  }
 
   initTargets() {
     this.el.list = document.getElementById("products");

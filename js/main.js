@@ -12,7 +12,7 @@ class MyForm {
   }
 
   initListener() {
-    this.formEl.addEventListener("submit", (event) => {
+    this.formEl.addEventListener("submit", async (event) => {
       // sustabdyti forma nuo issiuntimo
       event.preventDefault();
       // iskonsolinti kazka
@@ -31,6 +31,9 @@ class MyForm {
       };
       // isspausdinti objekta
       console.log("newProductObj ===", newProductObj);
+      // issiusti objekta i serveri
+      const createdPostFromServer = await sendPost(newProductObj);
+      app.addNewProductToList(createdPostFromServer);
     });
   }
 
@@ -41,9 +44,6 @@ class MyForm {
 
   getCategoriesFetch() {
     // gauti kategorijas is 'https://dummyjson.com/products/categories'
-    getData("https://dummyjson.com/products/categories").then((data) =>
-      console.log("data.category ===", data.category)
-    );
     // irasyti i this.categoriesArrFetch
   }
 }
