@@ -21,6 +21,12 @@ function getSingleProduct(id) {
   return getData(`${BASE_URL}/products/${id}`).then((item) => item);
 }
 
+function getProductCategories() {
+  return getData(`${BASE_URL}/products/categories`).then(
+    (categoriesArr) => categoriesArr
+  );
+}
+
 function makeOneSingItem(itemObj) {
   /* 
     <div class="shop-item card">

@@ -6,9 +6,12 @@ console.log("app ===", app);
 
 class MyForm {
   formEl = document.forms[0];
+  categorySelEl = this.formEl.category;
+  categoriesArrFetch = [];
 
   constructor() {
     this.initListener();
+    this.getCategoriesFetch().then(() => this.makeAndAddCategoriesOptions());
   }
 
   initListener() {
@@ -42,9 +45,22 @@ class MyForm {
     // atrinkti visas skirtingas kategorijas i masyva ir ji irasyti i this.categoriesArr
   }
 
-  getCategoriesFetch() {
+  async getCategoriesFetch() {
     // gauti kategorijas is 'https://dummyjson.com/products/categories'
     // irasyti i this.categoriesArrFetch
+    this.categoriesArrFetch = await getProductCategories();
+    // this.makeAndAddCategoriesOptions();
+  }
+  makeAndAddCategoriesOptions() {
+    // panaudoti kategoriju masyva this.categoriesArrFetch pagalminti pasirinkimus selectui
+    this.categoriesArrFetch.forEach((catString) => {
+      // sukuriam option elementa
+      const optionEl = document.createElement("option");
+      optionEl.value = catString;
+      optionEl.textContent = catString;
+      this.categorySelEl.append(optionEl);
+    });
+    // sugeneruoti pasirinkimus kategoriju selektui.
   }
 }
 
