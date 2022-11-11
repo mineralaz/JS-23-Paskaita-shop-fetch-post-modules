@@ -27,6 +27,12 @@ function getProductCategories() {
   );
 }
 
+function getProdInCategory(category) {
+  return getData(`${BASE_URL}/products/category/${category}`).then(
+    (data) => data.products
+  );
+}
+
 function makeOneSingItem(itemObj) {
   /* 
     <div class="shop-item card">
@@ -49,10 +55,3 @@ function makeOneSingItem(itemObj) {
 }
 // getSingleProduct(5);
 // getProducts().then(products);
-
-function filterByCategories(category) {
-  app.items.filter((item) => {
-    if (item.category === category) {
-    }
-  });
-}

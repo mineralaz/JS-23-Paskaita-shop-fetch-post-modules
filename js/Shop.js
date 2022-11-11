@@ -46,6 +46,14 @@ class Shop {
     return divEl;
   }
 
+  async filterCategory(event) {
+    const filterValue = event.target.value;
+    console.log("filterValue ===", filterValue);
+    this.items = await getProdInCategory(filterValue);
+    console.log("this.items ===", this.items);
+    this.renderList();
+  }
+
   renderList() {
     this.el.list.innerHTML = "";
     this.items

@@ -8,13 +8,12 @@ class MyForm {
   formEl = document.forms[0];
   formFieldSetEl = document.getElementById("add-form-field");
   categorySelEl = this.formEl.category;
-  filterSelEl = document.getElementById("filter-category");
+
   categoriesArrFetch = [];
 
   constructor() {
     this.initListener();
     this.getCategoriesFetch().then(() => this.makeAndAddCategoriesOptions());
-    this.getCategoriesFetch().then(() => this.makeAndAddCategoriesFilter());
   }
 
   initListener() {
@@ -42,10 +41,8 @@ class MyForm {
 
       if (createdPostFromServer) {
         this.formFieldSetEl.style.display = "none";
-      } else {
-        console.log("error");
+        app.addNewProductToList(createdPostFromServer);
       }
-      app.addNewProductToList(createdPostFromServer);
     });
   }
 
@@ -83,6 +80,21 @@ class MyForm {
     // sugeneruoti pasirinkimus kategoriju selektui.
   }
 }
+async function initFilter() {
+  const filterSelectEl = document.getElementById("filter-category");
 
+  filterSelectEl.addEventListener("change", app.filterCategory);
+
+  const catArray = await getProductCategories();
+  console.log("catArray ===", catArray);
+
+  catArray.forEach((catString) => {
+    const optionEl = document.createElement("option");
+    optionEl.value = catString;
+    optionEl.textContent = catString;
+    filterSelectEl.append(optionEl);
+  });
+}
+initFilter();
 const form1 = new MyForm();
 console.log("form1 ===", form1);
