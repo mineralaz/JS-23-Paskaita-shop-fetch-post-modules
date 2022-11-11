@@ -20,5 +20,26 @@ function getProducts() {
 function getSingleProduct(id) {
   return getData(`${BASE_URL}/products/${id}`).then((item) => item);
 }
+
+function makeOneSingItem(itemObj) {
+  /* 
+    <div class="shop-item card">
+    </div>
+    */
+  const divEl = document.createElement("div");
+  divEl.className = "shop-item card";
+  divEl.innerHTML = `
+      <img src="${itemObj.thumbnail}" alt="preke">
+        <p class="price">${itemObj.price} eur</p>
+        <p>Category: ${itemObj.category} (id:${itemObj.id})</p>
+        <p>Description: ${itemObj.description}</p>
+        <p><i> Stock: ${itemObj.stock}</i></p>
+        <div class="control">
+          <button>Add to cart</button>
+          <a href="index.html"> < Go back</a>
+        </div>
+    `;
+  return divEl;
+}
 // getSingleProduct(5);
 // getProducts().then(products);

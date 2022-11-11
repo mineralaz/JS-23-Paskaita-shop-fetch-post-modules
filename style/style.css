@@ -11,3 +11,8 @@
   width: 100%;
   object-fit: cover;
 }
+
+.product .shop-item img {
+  height: initial;
+  width: 100%;
+}
