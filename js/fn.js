@@ -1,8 +1,9 @@
 "use strict";
 console.log("fn.js");
 
-// https://dummyjson.com/products
+// 'https://dummyjson.com/products';
 const BASE_URL = "https://dummyjson.com";
+const BASE_URL_DEVELOPMENT = "db.json";
 
 // bendrine fetch funkcija
 function getData(from) {
@@ -13,7 +14,11 @@ function getData(from) {
 
 // konkreti funkcija gauti produktams
 function getProducts() {
-  return getData(`${BASE_URL}/products`).then((data) => data.products);
+  return getData(`${BASE_URL_DEVELOPMENT}`).then((data) => data.products);
 }
 
+function getSingleProduct(id) {
+  return getData(`${BASE_URL}/products/${id}`).then((item) => item);
+}
+// getSingleProduct(5);
 // getProducts().then(products);

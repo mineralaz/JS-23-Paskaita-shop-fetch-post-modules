@@ -14,27 +14,32 @@ class Shop {
   initTargets() {
     this.el.list = document.getElementById("products");
   }
+
   getItems() {
     getProducts().then((products) => {
       this.items = products;
+      // console.log(JSON.stringify(products[0], null, 2));
       this.renderList();
     });
   }
 
   makeOneItem(itemObj) {
+    /* 
+    <div class="shop-item card">
+    </div>
+    */
     const divEl = document.createElement("div");
     divEl.className = "shop-item card";
     divEl.innerHTML = `
-        <img src="${itemObj.thumbnail}" alt="preke">
+      <img src="${itemObj.thumbnail}" alt="preke">
         <h3>${itemObj.title}</h3>
         <p class="price">${itemObj.price} eur</p>
-        <p>Category: ${itemObj.category}</p>
+        <p>Category: ${itemObj.category} (id:${itemObj.id})</p>
         <div class="control">
-            <button>Add to cart</button>
-            <a href="#">more info ></a>
+          <button>Add to cart</button>
+          <a href="product.html?prId=${itemObj.id}">more info ></a>
         </div>
-
-`;
+    `;
     return divEl;
   }
 
