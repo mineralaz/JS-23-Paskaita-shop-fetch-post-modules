@@ -7,12 +7,41 @@
     <title>Buy buy buy</title>
     <link rel="stylesheet" href="./style/style.css" />
     <script src="./js/fn.js" defer></script>
+    <script src="./js/Shop.js" defer></script>
     <script src="./js/main.js" defer></script>
   </head>
 
   <body>
     <div class="container">
       <h1>E Shop</h1>
+
+      <fieldset>
+        <form class="flex flex-col max-w-300">
+          <input type="text" id="title" placeholder="Title" value="Shoe" />
+          <input type="number" id="price" placeholder="price" value="155" />
+          <input
+            type="text"
+            id="thumbnail"
+            placeholder="Image Url"
+            value="www.nike.com"
+          />
+          <textarea
+            name="description"
+            id="description"
+            placeholder="description"
+          >
+kazka</textarea
+          >
+          <div>
+            <label for="category">Kategorija</label>
+            <select name="category" id="category">
+              <option selected disabled>Pasirinkite kategorija</option>
+            </select>
+          </div>
+          <button type="submit" class="">Create</button>
+        </form>
+      </fieldset>
+
       <div id="products" class="products">
         <div class="shop-item card">
           <img src="" alt="preke" />

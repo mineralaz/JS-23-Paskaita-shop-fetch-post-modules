@@ -1,56 +1,52 @@
 "use strict";
 console.log("main.js");
 
-class Shop {
-  // html element targets
-  el = {};
-  items = [];
+const app = new Shop();
+console.log("app ===", app);
+
+class MyForm {
+  formEl = document.forms[0];
 
   constructor() {
-    this.initTargets();
-    this.getItems();
+    this.initListener();
   }
 
-  initTargets() {
-    this.el.list = document.getElementById("products");
-  }
+  initListener() {
+    this.formEl.addEventListener("submit", (event) => {
+      // sustabdyti forma nuo issiuntimo
+      event.preventDefault();
+      // iskonsolinti kazka
+      console.log("js control form");
+      // surinkti visus inputus i javascriptini objekta
+      // constantos formos elementams
+      const { title, price, thumbnail, description, category } =
+        this.formEl.elements;
 
-  getItems() {
-    getProducts().then((products) => {
-      this.items = products;
-      // console.log(JSON.stringify(products[0], null, 2));
-      this.renderList();
+      const newProductObj = {
+        title: title.value.trim(),
+        price: price.value.trim(),
+        thumbnail: thumbnail.value.trim(),
+        description: description.value.trim(),
+        category: category.value.trim(),
+      };
+      // isspausdinti objekta
+      console.log("newProductObj ===", newProductObj);
     });
   }
 
-  makeOneItem(itemObj) {
-    /* 
-    <div class="shop-item card">
-    </div>
-    */
-    const divEl = document.createElement("div");
-    divEl.className = "shop-item card";
-    divEl.innerHTML = `
-      <img src="${itemObj.thumbnail}" alt="preke">
-        <h3>${itemObj.title}</h3>
-        <p class="price">${itemObj.price} eur</p>
-        <p>Category: ${itemObj.category} (id:${itemObj.id})</p>
-        
-        <div class="control">
-          <button>Add to cart</button>
-          <a href="product.html?prId=${itemObj.id}">more info ></a>
-        </div>
-    `;
-    return divEl;
+  getCategoriesArray(allDataArr) {
+    // is allDataArr === app.items
+    // atrinkti visas skirtingas kategorijas i masyva ir ji irasyti i this.categoriesArr
   }
 
-  renderList() {
-    this.el.list.innerHTML = "";
-    this.items
-      .map((iObj) => this.makeOneItem(iObj))
-      .forEach((htmlEl) => this.el.list.append(htmlEl));
+  getCategoriesFetch() {
+    // gauti kategorijas is 'https://dummyjson.com/products/categories'
+    getData("https://dummyjson.com/products/categories").then((data) =>
+      console.log("data.category ===", data.category)
+    );
+    // irasyti i this.categoriesArrFetch
   }
-} // class end
+}
 
-const app = new Shop();
-console.log("app ===", app);
+const form1 = new MyForm();
+console.log("form1 ===", form1);
