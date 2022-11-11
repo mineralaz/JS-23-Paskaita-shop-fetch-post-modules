@@ -49,3 +49,10 @@ function makeOneSingItem(itemObj) {
 }
 // getSingleProduct(5);
 // getProducts().then(products);
+
+function filterByCategories(category) {
+  app.items.filter((item) => {
+    if (item.category === category) {
+    }
+  });
+}

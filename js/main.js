@@ -6,12 +6,15 @@ console.log("app ===", app);
 
 class MyForm {
   formEl = document.forms[0];
+  formFieldSetEl = document.getElementById("add-form-field");
   categorySelEl = this.formEl.category;
+  filterSelEl = document.getElementById("filter-category");
   categoriesArrFetch = [];
 
   constructor() {
     this.initListener();
     this.getCategoriesFetch().then(() => this.makeAndAddCategoriesOptions());
+    this.getCategoriesFetch().then(() => this.makeAndAddCategoriesFilter());
   }
 
   initListener() {
@@ -36,6 +39,12 @@ class MyForm {
       console.log("newProductObj ===", newProductObj);
       // issiusti objekta i serveri
       const createdPostFromServer = await sendPost(newProductObj);
+
+      if (createdPostFromServer) {
+        this.formFieldSetEl.style.display = "none";
+      } else {
+        console.log("error");
+      }
       app.addNewProductToList(createdPostFromServer);
     });
   }
@@ -59,6 +68,17 @@ class MyForm {
       optionEl.value = catString;
       optionEl.textContent = catString;
       this.categorySelEl.append(optionEl);
+    });
+    // sugeneruoti pasirinkimus kategoriju selektui.
+  }
+  makeAndAddCategoriesFilter() {
+    // panaudoti kategoriju masyva this.categoriesArrFetch pagalminti pasirinkimus selectui
+    this.categoriesArrFetch.forEach((catString) => {
+      // sukuriam option elementa
+      const optionEl = document.createElement("option");
+      optionEl.value = catString;
+      optionEl.textContent = catString;
+      this.filterSelEl.append(optionEl);
     });
     // sugeneruoti pasirinkimus kategoriju selektui.
   }
